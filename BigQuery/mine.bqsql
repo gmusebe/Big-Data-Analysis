@@ -1,0 +1,94 @@
+-- Data Overview;
+-- Count the total number of entries & columns in the table:
+SELECT
+  total_entries,
+  no_of_columns
+FROM
+  (SELECT COUNT(*) AS total_entries
+   FROM `youtube-factcheck.earthquake_analysis.earthquakes_copy`) AS entries,
+  (SELECT COUNT(DISTINCT column_name) AS no_of_columns
+   FROM `youtube-factcheck`.earthquake_analysis.INFORMATION_SCHEMA.COLUMNS
+   WHERE table_name = "earthquakes_copy") AS columns;
+
+-- The table contains the following columns:
+SELECT column_name
+FROM
+  `youtube-factcheck`.earthquake_analysis.INFORMATION_SCHEMA.COLUMNS
+WHERE table_name = "earthquakes_copy";
+
+
+--  Interested in the geographical entries;
+-- Show the first five records:
+SELECT id, year, country, state, location_name, latitude,longitude, region_code
+FROM
+  `youtube-factcheck.earthquake_analysis.earthquakes_copy`
+LIMIT 5;
+
+
+-- Check the time range when earthquakes have been recorded:
+SELECT
+  MIN(year) AS first_year,
+  MAX(year) AS last_year
+FROM 
+  `youtube-factcheck.earthquake_analysis.earthquakes_copy`;
+
+-- # Feature Engineering and Data Cleaning:
+-- ## Cleaning
+-- ### Completeness of data
+--  Completeness of data is assessed by checking whether the data has has any missing value. The data is defined as complete if it all records(rows) have all the values filled
+
+--  Count the number of missing values in each column in the data:
+SELECT
+  COUNT(CASE WHEN id IS NULL THEN 1 END) AS missing_id,
+  COUNT(CASE WHEN flag_tsunami IS NULL THEN 1 END) AS missing_flag_tsunami,
+  COUNT(CASE WHEN year IS NULL THEN 1 END) AS missing_year,
+  COUNT(CASE WHEN month IS NULL THEN 1 END) AS missing_month,
+  COUNT(CASE WHEN day IS NULL THEN 1 END) AS missing_day,
+  COUNT(CASE WHEN hour IS NULL THEN 1 END) AS missing_hour,
+  COUNT(CASE WHEN minute IS NULL THEN 1 END) AS missing_minute,
+  COUNT(CASE WHEN second IS NULL THEN 1 END) AS missing_second,
+  COUNT(CASE WHEN focal_depth IS NULL THEN 1 END) AS missing_focal_depth,
+  COUNT(CASE WHEN eq_primary IS NULL THEN 1 END) AS missing_eq_primary,
+  COUNT(CASE WHEN eq_mag_mw IS NULL THEN 1 END) AS missing_eq_mag_mw,
+  COUNT(CASE WHEN eq_mag_ms IS NULL THEN 1 END) AS missing_eq_mag_ms,
+  COUNT(CASE WHEN eq_mag_mb IS NULL THEN 1 END) AS missing_eq_mag_mb,
+  COUNT(CASE WHEN eq_mag_ml IS NULL THEN 1 END) AS missing_eq_mag_ml,
+  COUNT(CASE WHEN eq_mag_mfa IS NULL THEN 1 END) AS missing_eq_mag_mfa,
+  COUNT(CASE WHEN eq_mag_unk IS NULL THEN 1 END) AS missing_eq_mag_unk,
+  COUNT(CASE WHEN intensity IS NULL THEN 1 END) AS missing_intensity,
+  COUNT(CASE WHEN country IS NULL THEN 1 END) AS missing_country,
+  COUNT(CASE WHEN state IS NULL THEN 1 END) AS missing_state,
+  COUNT(CASE WHEN location_name IS NULL THEN 1 END) AS missing_location_name,
+  COUNT(CASE WHEN latitude IS NULL THEN 1 END) AS missing_latitude,
+  COUNT(CASE WHEN longitude IS NULL THEN 1 END) AS missing_longitude,
+  COUNT(CASE WHEN region_code IS NULL THEN 1 END) AS missing_region_code,
+  COUNT(CASE WHEN deaths IS NULL THEN 1 END) AS missing_deaths,
+  COUNT(CASE WHEN deaths_description IS NULL THEN 1 END) AS missing_deaths_description,
+  COUNT(CASE WHEN missing IS NULL THEN 1 END) AS missing_missing,
+  COUNT(CASE WHEN missing_description IS NULL THEN 1 END) AS missing_missing_description,
+  COUNT(CASE WHEN injuries IS NULL THEN 1 END) AS missing_injuries,
+  COUNT(CASE WHEN injuries_description IS NULL THEN 1 END) AS missing_injuries_description,
+  COUNT(CASE WHEN damage_millions_dollars IS NULL THEN 1 END) AS missing_damage_millions_dollars,
+  COUNT(CASE WHEN damage_description IS NULL THEN 1 END) AS missing_damage_description,
+  COUNT(CASE WHEN houses_destroyed IS NULL THEN 1 END) AS missing_houses_destroyed,
+  COUNT(CASE WHEN houses_destroyed_description IS NULL THEN 1 END) AS missing_houses_destroyed_description,
+  COUNT(CASE WHEN houses_damaged IS NULL THEN 1 END) AS missing_houses_damaged,
+  COUNT(CASE WHEN houses_damaged_description IS NULL THEN 1 END) AS missing_houses_damaged_description,
+  COUNT(CASE WHEN total_deaths IS NULL THEN 1 END) AS missing_total_deaths,
+  COUNT(CASE WHEN total_deaths_description IS NULL THEN 1 END) AS missing_total_deaths_description,
+  COUNT(CASE WHEN total_missing IS NULL THEN 1 END) AS missing_total_missing,
+  COUNT(CASE WHEN total_missing_description IS NULL THEN 1 END) AS missing_total_missing_description,
+  COUNT(CASE WHEN total_injuries IS NULL THEN 1 END) AS missing_total_injuries,
+  COUNT(CASE WHEN total_injuries_description IS NULL THEN 1 END) AS missing_total_injuries_description,
+  COUNT(CASE WHEN total_damage_millions_dollars IS NULL THEN 1 END) AS missing_total_damage_millions_dollars,
+  COUNT(CASE WHEN total_damage_description IS NULL THEN 1 END) AS missing_total_damage_description,
+  COUNT(CASE WHEN total_houses_destroyed IS NULL THEN 1 END) AS missing_total_houses_destroyed,
+  COUNT(CASE WHEN total_houses_destroyed_description IS NULL THEN 1 END) AS missing_total_houses_destroyed_description,
+  COUNT(CASE WHEN total_houses_damaged IS NULL THEN 1 END) AS missing_total_houses_damaged,
+  COUNT(CASE WHEN total_houses_damaged_description IS NULL THEN 1 END) AS missing_total_houses_damaged_description
+FROM
+  `youtube-factcheck.earthquake_analysis.earthquakes_copy`;
+
+--  The earthquake table has missing values. Let's see how to deal with the missing values by column
+-- ## Datetime columns
+--  Show how many missing 
