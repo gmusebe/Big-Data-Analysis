@@ -38,57 +38,182 @@ FROM
 --  Completeness of data is assessed by checking whether the data has has any missing value. The data is defined as complete if it all records(rows) have all the values filled
 
 --  Count the number of missing values in each column in the data:
-SELECT
-  COUNT(CASE WHEN id IS NULL THEN 1 END) AS missing_id,
-  COUNT(CASE WHEN flag_tsunami IS NULL THEN 1 END) AS missing_flag_tsunami,
-  COUNT(CASE WHEN year IS NULL THEN 1 END) AS missing_year,
-  COUNT(CASE WHEN month IS NULL THEN 1 END) AS missing_month,
-  COUNT(CASE WHEN day IS NULL THEN 1 END) AS missing_day,
-  COUNT(CASE WHEN hour IS NULL THEN 1 END) AS missing_hour,
-  COUNT(CASE WHEN minute IS NULL THEN 1 END) AS missing_minute,
-  COUNT(CASE WHEN second IS NULL THEN 1 END) AS missing_second,
-  COUNT(CASE WHEN focal_depth IS NULL THEN 1 END) AS missing_focal_depth,
-  COUNT(CASE WHEN eq_primary IS NULL THEN 1 END) AS missing_eq_primary,
-  COUNT(CASE WHEN eq_mag_mw IS NULL THEN 1 END) AS missing_eq_mag_mw,
-  COUNT(CASE WHEN eq_mag_ms IS NULL THEN 1 END) AS missing_eq_mag_ms,
-  COUNT(CASE WHEN eq_mag_mb IS NULL THEN 1 END) AS missing_eq_mag_mb,
-  COUNT(CASE WHEN eq_mag_ml IS NULL THEN 1 END) AS missing_eq_mag_ml,
-  COUNT(CASE WHEN eq_mag_mfa IS NULL THEN 1 END) AS missing_eq_mag_mfa,
-  COUNT(CASE WHEN eq_mag_unk IS NULL THEN 1 END) AS missing_eq_mag_unk,
-  COUNT(CASE WHEN intensity IS NULL THEN 1 END) AS missing_intensity,
-  COUNT(CASE WHEN country IS NULL THEN 1 END) AS missing_country,
-  COUNT(CASE WHEN state IS NULL THEN 1 END) AS missing_state,
-  COUNT(CASE WHEN location_name IS NULL THEN 1 END) AS missing_location_name,
-  COUNT(CASE WHEN latitude IS NULL THEN 1 END) AS missing_latitude,
-  COUNT(CASE WHEN longitude IS NULL THEN 1 END) AS missing_longitude,
-  COUNT(CASE WHEN region_code IS NULL THEN 1 END) AS missing_region_code,
-  COUNT(CASE WHEN deaths IS NULL THEN 1 END) AS missing_deaths,
-  COUNT(CASE WHEN deaths_description IS NULL THEN 1 END) AS missing_deaths_description,
-  COUNT(CASE WHEN missing IS NULL THEN 1 END) AS missing_missing,
-  COUNT(CASE WHEN missing_description IS NULL THEN 1 END) AS missing_missing_description,
-  COUNT(CASE WHEN injuries IS NULL THEN 1 END) AS missing_injuries,
-  COUNT(CASE WHEN injuries_description IS NULL THEN 1 END) AS missing_injuries_description,
-  COUNT(CASE WHEN damage_millions_dollars IS NULL THEN 1 END) AS missing_damage_millions_dollars,
-  COUNT(CASE WHEN damage_description IS NULL THEN 1 END) AS missing_damage_description,
-  COUNT(CASE WHEN houses_destroyed IS NULL THEN 1 END) AS missing_houses_destroyed,
-  COUNT(CASE WHEN houses_destroyed_description IS NULL THEN 1 END) AS missing_houses_destroyed_description,
-  COUNT(CASE WHEN houses_damaged IS NULL THEN 1 END) AS missing_houses_damaged,
-  COUNT(CASE WHEN houses_damaged_description IS NULL THEN 1 END) AS missing_houses_damaged_description,
-  COUNT(CASE WHEN total_deaths IS NULL THEN 1 END) AS missing_total_deaths,
-  COUNT(CASE WHEN total_deaths_description IS NULL THEN 1 END) AS missing_total_deaths_description,
-  COUNT(CASE WHEN total_missing IS NULL THEN 1 END) AS missing_total_missing,
-  COUNT(CASE WHEN total_missing_description IS NULL THEN 1 END) AS missing_total_missing_description,
-  COUNT(CASE WHEN total_injuries IS NULL THEN 1 END) AS missing_total_injuries,
-  COUNT(CASE WHEN total_injuries_description IS NULL THEN 1 END) AS missing_total_injuries_description,
-  COUNT(CASE WHEN total_damage_millions_dollars IS NULL THEN 1 END) AS missing_total_damage_millions_dollars,
-  COUNT(CASE WHEN total_damage_description IS NULL THEN 1 END) AS missing_total_damage_description,
-  COUNT(CASE WHEN total_houses_destroyed IS NULL THEN 1 END) AS missing_total_houses_destroyed,
-  COUNT(CASE WHEN total_houses_destroyed_description IS NULL THEN 1 END) AS missing_total_houses_destroyed_description,
-  COUNT(CASE WHEN total_houses_damaged IS NULL THEN 1 END) AS missing_total_houses_damaged,
-  COUNT(CASE WHEN total_houses_damaged_description IS NULL THEN 1 END) AS missing_total_houses_damaged_description
-FROM
-  `youtube-factcheck.earthquake_analysis.earthquakes_copy`;
+with ColumnNames as (
+  select column_name,
+        count(*) as non_missing_entries
+  from (
+      select cast(id as string) as id,
+             flag_tsunami,
+             cast(year as string) as year,
+             cast(month as string) as month,
+             cast(day as string) as day,
+             cast(focal_depth as string) as focal_depth,
+             cast(eq_primary as string) as eq_primary,
+             cast(eq_mag_mw as string) as eq_mag_mw,
+             cast(eq_mag_ms as string) as eq_mag_ms,
+             cast(eq_mag_mb as string) as eq_mag_mb,
+             cast(eq_mag_ml as string) as eq_mag_ml,
+             cast(eq_mag_mfa as string) as eq_mag_mfa,
+             cast(eq_mag_unk as string) as eq_mag_unk,
+             cast(intensity as string) as intensity,
+             cast(state as string) as state,
+             cast(location_name as string) as location_name,
+             cast(latitude as string) as latitude,
+             cast(longitude as string) as longitude,
+             cast(region_code as string) as region_code
+      from `youtube-factcheck.earthquake_analysis.earthquakes_copy`)
+      unpivot ( value for column_name in (id, flag_tsunami,year,month,day,focal_depth,eq_primary,eq_mag_mw, eq_mag_ms, eq_mag_mb, eq_mag_ml, eq_mag_mfa,eq_mag_unk, intensity,state, location_name, latitude, longitude, region_code))
+      group by column_name
+),
+id_only as (
+  select column_name,non_missing_entries
+  from ColumnNames
+  where column_name = 'id'
+)
+select ColumnNames.column_name,
+      ColumnNames.non_missing_entries,
+      (id_only.non_missing_entries - ColumnNames.non_missing_entries) * 100.0 / id_only.non_missing_entries as percentage_missing
+from ColumnNames
+cross join id_only;
 
---  The earthquake table has missing values. Let's see how to deal with the missing values by column
--- ## Datetime columns
---  Show how many missing 
+-- The earthquake table has missing values. Let's see how to deal with the missing values by column:
+-- 1. flag_tsunami
+-- This column shows whether a tsunami was recorded or not.
+-- For all the missing values fill them with "None" to mean No Tsunami was recorded.
+UPDATE 
+  `youtube-factcheck.earthquake_analysis.earthquakes_copy`
+SET flag_tsunami = 'No Tsu'
+WHERE flag_tsunami IS NULL;
+
+-- ## Datetime columns:
+-- To fill missing values in the 'month' and 'day' columns based on the available 'year' information, consider a reasonable default value or strategy.
+-- One common approach is to fill missing 'month' and 'day' values with some default values, such as 01 for month and 01 for day.
+-- With  414 month and 568 day missing value, it would be tedious to seek entries for each of this records.
+
+UPDATE `youtube-factcheck.earthquake_analysis.earthquakes_copy`
+SET 
+  month = IFNULL(month, 1),
+  day = IFNULL(day, 1)
+WHERE year IS NOT NULL;
+
+
+-- Fill the earthquake magnitude column with the yearly monthly location specific mean or median magnitude for each specific magnitude type to fill in missing values. This helps maintain the overall distribution of magnitudes for each type.
+-- The below SQL query fills the missing values in the earthquake magnitude columns using the mean magnitude for each specific type:
+
+
+UPDATE `youtube-factcheck.earthquake_analysis.earthquakes_copy`
+SET
+  eq_primary = IFNULL(eq_primary,
+  (
+    SELECT
+      MAX(eq_primary)
+    FROM
+      youtube-factcheck.earthquake_analysis.earthquakes_copy
+    WHERE
+      eq_primary IS NOT NULL AND
+      year = earthquakes_copy.year AND
+      month = earthquakes_copy.month AND
+      location_name = earthquakes_copy.location_name
+  )
+),
+  eq_mag_mw = IFNULL(eq_mag_mw,
+  (
+    SELECT
+      AVG(eq_mag_mw)
+    FROM
+      youtube-factcheck.earthquake_analysis.earthquakes_copy
+    WHERE
+      eq_mag_mw IS NOT NULL AND
+      year = earthquakes_copy.year AND
+      month = earthquakes_copy.month AND
+      location_name = earthquakes_copy.location_name
+  )
+),
+  eq_mag_ms = IFNULL(eq_mag_ms,
+  (
+    SELECT
+      AVG(eq_mag_ms)
+    FROM
+      youtube-factcheck.earthquake_analysis.earthquakes_copy
+    WHERE
+      eq_mag_ms IS NOT NULL AND
+      year = earthquakes_copy.year AND
+      month = earthquakes_copy.month AND
+      location_name = earthquakes_copy.location_name
+  )
+),
+  eq_mag_mb = IFNULL(eq_mag_mb,
+  (
+    SELECT
+      AVG(eq_mag_mb)
+    FROM
+      youtube-factcheck.earthquake_analysis.earthquakes_copy
+    WHERE
+      eq_mag_mb IS NOT NULL AND
+      year = earthquakes_copy.year AND
+      month = earthquakes_copy.month AND
+      location_name = earthquakes_copy.location_name
+  )
+),
+  eq_mag_ml = IFNULL(eq_mag_ml,
+  (
+    SELECT
+      AVG(eq_mag_ml)
+    FROM
+      youtube-factcheck.earthquake_analysis.earthquakes_copy
+    WHERE
+      eq_mag_ml IS NOT NULL AND
+      year = earthquakes_copy.year AND
+      month = earthquakes_copy.month AND
+      location_name = earthquakes_copy.location_name
+  )
+),
+  eq_mag_mfa = IFNULL(eq_mag_mfa,
+  (
+    SELECT
+      AVG(eq_mag_mfa)
+    FROM
+      youtube-factcheck.earthquake_analysis.earthquakes_copy
+    WHERE
+      eq_mag_mfa IS NOT NULL AND
+      year = earthquakes_copy.year AND
+      month = earthquakes_copy.month AND
+      location_name = earthquakes_copy.location_name
+  )
+),
+  eq_mag_unk = IFNULL(eq_mag_unk,
+  (
+    SELECT
+      AVG(eq_mag_unk)
+    FROM
+      youtube-factcheck.earthquake_analysis.earthquakes_copy
+    WHERE
+      eq_mag_unk IS NOT NULL AND
+      year = earthquakes_copy.year AND
+      month = earthquakes_copy.month AND
+      location_name = earthquakes_copy.location_name
+  )
+)
+WHERE
+  eq_primary IS NULL OR
+  eq_mag_mw IS NULL OR
+  eq_mag_ms IS NULL OR
+  eq_mag_mb IS NULL OR
+  eq_mag_ml IS NULL OR
+  eq_mag_mfa IS NULL OR
+  eq_mag_unk IS NULL;
+
+
+-- Location_name
+--  There is only one cell missing its location name located New Zealand but has coordinates; latitide: -40.2, longitude: 73. Let's search for the  cordinates in Google Maps and fill missing location name. 
+--  The coordinates, on Google map, point a location in the sea within the Cook Strait sea region: 
+
+UPDATE
+  `youtube-factcheck.earthquake_analysis.earthquakes_copy`
+SET 
+  location_name = "Cook Strait"
+WHERE longitude = 173 AND latitude = -40.2;
+
+
+-- For the missing coordinates, we will perform geocoding using the Google Maps API. The following code will fill in the missing longitudes and latitudes:
+
