@@ -1,0 +1,39 @@
+-- ""--  Count the number of missing values in each column in the data:
+-- with ColumnNames as (
+--   select column_name,
+--         count(*) as non_missing_entries
+--   from (
+--       select cast(id as string) as id,
+--              flag_tsunami,
+--              cast(year as string) as year,
+--              cast(month as string) as month,
+--              cast(day as string) as day,
+--              cast(focal_depth as string) as focal_depth,
+--              cast(eq_primary as string) as eq_primary,
+--              cast(eq_mag_mw as string) as eq_mag_mw,
+--              cast(eq_mag_ms as string) as eq_mag_ms,
+--              cast(eq_mag_mb as string) as eq_mag_mb,
+--              cast(eq_mag_ml as string) as eq_mag_ml,
+--              cast(eq_mag_mfa as string) as eq_mag_mfa,
+--              cast(eq_mag_unk as string) as eq_mag_unk,
+--              cast(intensity as string) as intensity,
+--              country,
+--              cast(state as string) as state,
+--              cast(location_name as string) as location_name,
+--              cast(latitude as string) as latitude,
+--              cast(longitude as string) as longitude,
+--              cast(region_code as string) as region_code
+--       from `youtube-factcheck.earthquake_analysis.earthquakes_copy`)
+--       unpivot ( value for column_name in (id, flag_tsunami,year,month,day,focal_depth,eq_primary,eq_mag_mw, eq_mag_ms, eq_mag_mb, eq_mag_ml, eq_mag_mfa,eq_mag_unk, intensity,state, location_name, latitude, longitude, region_code))
+--       group by column_name
+-- ),
+-- id_only as (
+--   select column_name,non_missing_entries
+--   from ColumnNames
+--   where column_name = 'id'
+-- )
+-- select ColumnNames.column_name,
+--       ColumnNames.non_missing_entries,
+--       (id_only.non_missing_entries - ColumnNames.non_missing_entries) * 100.0 / id_only.non_missing_entries as percentage_missing
+-- from ColumnNames
+-- cross join id_only;

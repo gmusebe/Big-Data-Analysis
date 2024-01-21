@@ -217,3 +217,32 @@ WHERE longitude = 173 AND latitude = -40.2;
 
 -- For the missing coordinates, we will perform geocoding using the Google Maps API. The following code will fill in the missing longitudes and latitudes:
 
+
+
+
+-- Region code is assigned based on country.
+--  Check the country with missing region_code:
+SELECT
+  country
+FROM
+  `youtube-factcheck.earthquake_analysis.earthquakes_copy`
+WHERE
+  region_code is NULL;
+
+-- Netherlands is the country
+--  Check region code of Netherlands
+SELECT
+  region_code
+FROM
+  `youtube-factcheck.earthquake_analysis.earthquakes_copy`
+WHERE
+  country = "NETHERLANDS";
+
+-- Netehelands has the code 120.
+--  Update the region_code with the same value:
+UPDATE
+  `youtube-factcheck.earthquake_analysis.earthquakes_copy`
+SET
+  region_code = 120
+WHERE
+  country = 'NETHERLANDS' AND region_code IS NULL;
