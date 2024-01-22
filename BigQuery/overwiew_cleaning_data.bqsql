@@ -278,3 +278,27 @@ SET
   END
 WHERE 
   intensity IS NULL OR focal_depth IS NULL;  -- Update only rows with missing values
+
+
+-- Check Data duplicates:
+-- id are the unique identity of each reacord. Count the ids.
+SELECT
+  id, COUNT(*)
+FROM
+  `youtube-factcheck.earthquake_analysis.earthquakes_copy`
+GROUP BY id
+HAVING COUNT(*) > 1;
+
+-- The data has no duplicates.
+
+
+--  Check Data timeliness:
+--  The last recorded event is dated year 2021.
+--  From the data documentation, events are only considered relevant if they fall within the period 2000 B.C to present, (i.e -2000 to present or latest date/year recorded).
+-- Drop entries with dated before 2000 B.C (-2000)
+
+DELETE FROM `youtube-factcheck.earthquake_analysis.earthquakes_copy`
+WHERE year < -2000;
+
+-- Output:
+-- This statement removed 1 row from earthquakes_copy.
