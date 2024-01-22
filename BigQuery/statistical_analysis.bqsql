@@ -1,3 +1,14 @@
+/*
+	Significant Earthquakes
+  Author: Ivan Musebe
+	Email: musebeivan@gmail.com 
+	LinkedIn: https://www.linkedin.com/in/musebe-ivan/
+	
+	File Name: statistical_analysis.bgsql
+	
+*/
+
+
 -- A statistical overview and summaries of earthquake events:
 --  The main purpose of this file is to provide descriptive statists of earthquake events.
 
