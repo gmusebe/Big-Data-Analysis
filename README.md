@@ -62,7 +62,8 @@ Google Cloud CLI is now installed
 5. Set `bigqueryRunner.projectId` in `setting.json`.
     - Press `CTR + Shift + P`  select `Preferences: Open Default Settings (JSON)`
 
-    ![bigquery runner](./images/runner_settings.png "bigquery runner installer")
+
+    <img src="./images/runner_settings.png" width="500" height="130">
 
     - Click `Edit in settings.json` and paste `"bigqueryRunner.projectId": "{project_name}"`
 
