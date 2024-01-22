@@ -188,12 +188,13 @@ LIMIT
 
 --  Count the number of earthquakes where tsunami's were recorded and where they were not:
 
+
 SELECT
   flag_tsunami,
   COUNT(*) AS earthquake_count
 FROM
  `youtube-factcheck.earthquake_analysis.earthquakes_copy`
-GROUP BY flag_tsunami
+GROUP BY flag_tsunami;
 
 /*
 | flag_tsunami | earthquake_count |
@@ -274,13 +275,62 @@ LIMIT 5;
 
 -- What months do we have tsunamis occur in the above countries:
 SELECT
- country,
  month,
  COUNT(*) AS earthquake_count
 FROM
  `youtube-factcheck.earthquake_analysis.earthquakes_copy`
 WHERE
   flag_tsunami = "Tsu"
-GROUP BY country, month
-ORDER BY earthquake_count
+GROUP BY month
+ORDER BY earthquake_count;
 
+/*
+| month | earthquake_count |
+| 1     | 224              |
+| 11    | 184              |
+| 8     | 174              |
+| 12    | 158              |
+| 9     | 155              |
+| 3     | 153              |
+| 10     | 151             |
+| 5     | 148              |
+| 2     | 138              |
+| 7     | 131              |
+| 6     | 128              |
+| 4     | 125              |
+*/
+
+-- Generally most tsunamis are recorded in the months of January, November, August, December and September
+
+-- What is the average magnitude, intensity and focal depth of earthquakes in the top ten countries prone to earthquakes when tsunamis are recorded and when they are not:
+
+WITH TopCountries AS (
+  SELECT
+    country,
+    COUNT(*) AS earthquake_count
+  FROM
+    `youtube-factcheck.earthquake_analysis.earthquakes_copy`
+  GROUP BY
+    country
+  ORDER BY
+    earthquake_count DESC
+  LIMIT 10
+)
+
+SELECT
+  tc.country,
+  COUNT(*),
+  AVG(CASE WHEN flag_tsunami = 'Tsu' THEN eq_mag_mw END) AS avg_magnitude_tsunami,
+  AVG(CASE WHEN flag_tsunami = 'No Tsu' THEN eq_mag_mw END) AS avg_magnitude_no_tsunami,
+  AVG(CASE WHEN flag_tsunami = 'Tsu' THEN intensity END) AS avg_intensity_tsunami,
+  AVG(CASE WHEN flag_tsunami = 'No Tsu' THEN intensity END) AS avg_intensity_no_tsunami,
+  AVG(CASE WHEN flag_tsunami = 'Tsu' THEN focal_depth END) AS avg_focal_depth_tsunami,
+  AVG(CASE WHEN flag_tsunami = 'No Tsu' THEN focal_depth END) AS avg_focal_depth_no_tsunami
+FROM
+  `youtube-factcheck.earthquake_analysis.earthquakes_copy` eq
+JOIN
+  TopCountries tc ON eq.country = tc.country
+GROUP BY
+  tc.country
+ORDER BY
+  MAX(tc.earthquake_count) DESC;
