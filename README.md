@@ -61,15 +61,11 @@ Google Cloud CLI is now installed
 
 5. Set `bigqueryRunner.projectId` in `setting.json`.
     - Press `CTR + Shift + P`  select `Preferences: Open Default Settings (JSON)`
-
-
-        <img src="./images/runner_settings.png" width="450" height="118">
-
-    - Click `Edit in settings.json` and paste `"bigqueryRunner.projectId": "{project_name}"`
+    - Under **BigQuery Runner > Default Dataset: Project ID** click `Edit in settings.json` and paste `"bigqueryRunner.projectId": "{project_name}"`
 
     `Project_name` is the project in GCP that you selected in step 4. 
 
-
+**Let's proceed to the Analysis.**
 
 
 
