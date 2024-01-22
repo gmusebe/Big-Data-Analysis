@@ -56,13 +56,13 @@ with ColumnNames as (
              cast(eq_mag_mfa as string) as eq_mag_mfa,
              cast(eq_mag_unk as string) as eq_mag_unk,
              cast(intensity as string) as intensity,
-             cast(state as string) as state,
+             cast(country as string) as country,
              cast(location_name as string) as location_name,
              cast(latitude as string) as latitude,
              cast(longitude as string) as longitude,
              cast(region_code as string) as region_code
       from `youtube-factcheck.earthquake_analysis.earthquakes_copy`)
-      unpivot ( value for column_name in (id, flag_tsunami,year,month,day,focal_depth,eq_primary,eq_mag_mw, eq_mag_ms, eq_mag_mb, eq_mag_ml, eq_mag_mfa,eq_mag_unk, intensity,state, location_name, latitude, longitude, region_code))
+      unpivot ( value for column_name in (id, flag_tsunami,year,month,day,focal_depth,eq_primary,eq_mag_mw, eq_mag_ms, eq_mag_mb, eq_mag_ml, eq_mag_mfa,eq_mag_unk, intensity,country, location_name, latitude, longitude, region_code))
       group by column_name
 ),
 id_only as (
@@ -246,3 +246,35 @@ SET
   region_code = 120
 WHERE
   country = 'NETHERLANDS' AND region_code IS NULL;
+
+
+
+-- The criteria chosen for filling missing values in the "intensity" and "focal_depth" columns are based on common patterns or assumptions associated with earthquake events. Here's an explanation for each criterion:
+
+-- Tsunami Occurrence (flag_tsunami):
+
+-- If a tsunami occurred (flag_tsunami is 'Tsu'), it is common for the intensity to be higher, as tsunamis often result from powerful earthquakes. Therefore, we set the intensity to 5 and the focal depth to 50.
+-- Earthquake Magnitude (eq_mag_mw):
+
+-- For earthquakes with a high magnitude (greater than 7.0), there is an expectation of higher intensity and possibly a deeper focal depth. Hence, we set the intensity to 4 and the focal depth to 30 for such cases.
+-- Default Values (Else Condition):
+
+-- If the earthquake doesn't meet the above criteria, we use default values. For cases where a tsunami did not occur, and the earthquake magnitude is not particularly high, we set the intensity to 3 and the focal depth to 20.
+-- These criteria are general assumptions and may not cover all possible scenarios. Depending on the characteristics of your earthquake dataset and the nature of seismic events you are dealing with, you might need to tailor the criteria accordingly. It's important to analyze and understand the characteristics of your specific dataset to make informed decisions about how to impute missing values.
+
+
+UPDATE `youtube-factcheck.earthquake_analysis.earthquakes_copy`
+SET 
+  intensity = CASE
+    WHEN flag_tsunami = 'Tsu' THEN 5  -- Set intensity to 5 if Tsunami occurred
+    WHEN eq_mag_mw > 7.0 THEN 4       -- Set intensity to 4 for high magnitude earthquakes
+    ELSE 3                             -- Set intensity to 3 for other cases
+  END,
+  
+  focal_depth = CASE
+    WHEN flag_tsunami = 'Tsu' THEN 50  -- Set focal_depth to 50 if Tsunami occurred
+    WHEN eq_mag_mw > 7.0 THEN 30       -- Set focal_depth to 30 for high magnitude earthquakes
+    ELSE 20                            -- Set focal_depth to 20 for other cases
+  END
+WHERE 
+  intensity IS NULL OR focal_depth IS NULL;  -- Update only rows with missing values
