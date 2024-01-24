@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earthquake Counts Over Years</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+<body>
+
+<h1>Earthquake Counts Over Years</h1>
+
+<div id="chart"></div>
+
+<script>
+    // D3.js code for creating the line graph
+    document.addEventListener('DOMContentLoaded', function () {
+        const data = JSON.parse('{{ df_earthquake | safe }}');
+
+        const margin = { top: 20, right: 20, bottom: 30, left: 50 },
+            width = 600 - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom;
+
+        const svg = d3.select("#chart")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        const x = d3.scaleLinear().range([0, width]);
+        const y = d3.scaleLinear().range([height, 0]);
+
+        x.domain(d3.extent(data, d => d.year));
+        y.domain([0, d3.max(data, d => d.count)]);
+
+        const line = d3.line()
+            .x(d => x(d.year))
+            .y(d => y(d.count));
+
+        svg.append("path")
+            .datum(data)
+            .attr("class", "line")
+            .attr("d", line);
+
+        svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
+
+        svg.append("g")
+            .call(d3.axisLeft(y));
+
+    });
+</script>
+
+</body>
+</html>
