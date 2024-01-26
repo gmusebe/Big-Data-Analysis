@@ -99,3 +99,15 @@ Results:
 |	6272	    |    48         |
 
 # Visualising Data in Python
+This section leverages on  Python's visualization libraries to bring the BigQuery results to life. From geographic visualizations with [Folium](https://pypi.org/project/folium/), 3D mapping with [Kepler.gl](https://kepler.gl/) to interactive charts with [Plotly](https://plotly.com/), you'll find a diverse set of techniques to convey your data story.
+
+### `Example`
+#### Yearly Earthquake Distribution
+
+![Yearly Earthquake Distribution](../images/earthquake_ditg.png "Yearly Earthquake Distribution")
+
+#### Kepler Map
+Here is the live [map](http://127.0.0.1:5500/Python/Map%20Visuals/eq_world_dist.kgl.html).
+![Yearly Earthquake Distribution](../images/earthquake_dist.png "Yearly Earthquake Distribution")
+
+While Python🐍 allows such visualize, we cannot visualize dashboards, except for syncing D3js to create python apps. Hence the need for Tableau. See the [Tableau](https://github.com/gmusebe/BigData_Landscape/tree/main/Tableau) directory to vies the live dashboards.
