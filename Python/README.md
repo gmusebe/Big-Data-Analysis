@@ -103,7 +103,7 @@ This section leverages on  Python's visualization libraries to bring the BigQuer
 
 ### `Example`
 #### Yearly Earthquake Distribution
-<p align="center">
+<p align="right">
   <img src="../images/earthquake_ditg.png" alt="Yearly Earthquake Distribution" width="500" height="400">
 </p>
 
