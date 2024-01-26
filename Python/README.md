@@ -103,11 +103,16 @@ This section leverages on  Python's visualization libraries to bring the BigQuer
 
 ### `Example`
 #### Yearly Earthquake Distribution
-
-![Yearly Earthquake Distribution](../images/earthquake_ditg.png "Yearly Earthquake Distribution")
+<p align="center">
+  <img src="../images/earthquake_ditg.png" alt="Yearly Earthquake Distribution" width="500" height="400">
+</p>
 
 #### Kepler Map
 Here is the live [map](http://127.0.0.1:5500/Python/Map%20Visuals/eq_world_dist.kgl.html).
-![Yearly Earthquake Distribution](../images/earthquake_dist.png "Yearly Earthquake Distribution")
+
+<p align="center">
+  <img src="../images/earthquake_dist.png" alt="Yearly Earthquake Distribution Map" >
+</p>
+
 
 While Python🐍 allows such visualize, we cannot visualize dashboards, except for syncing D3js to create python apps. Hence the need for Tableau. See the [Tableau](https://github.com/gmusebe/BigData_Landscape/tree/main/Tableau) directory to vies the live dashboards.
