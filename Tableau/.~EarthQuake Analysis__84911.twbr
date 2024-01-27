@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8' ?>
 
 <!-- build 20233.23.1017.0948                               -->
-<workbook original-version='18.1' source-build='2023.3.0 (20233.23.1017.0948)' source-platform='mac' version='18.1' xml:base='https://prod-uk-a.online.tableau.com' xmlns:user='http://www.tableausoftware.com/xml/user'>
+<workbook original-version='18.1' source-build='2023.3.0 (20233.23.1017.0948)' source-platform='mac' version='18.1' xml:base='https://public.tableau.com' xmlns:user='http://www.tableausoftware.com/xml/user'>
   <document-format-change-manifest>
     <_.fcp.AccessibleZoneTabOrder.true...AccessibleZoneTabOrder />
     <_.fcp.AnimationOnByDefault.true...AnimationOnByDefault />
@@ -24,7 +24,7 @@
     <WorksheetBackgroundTransparency />
     <ZoneBackgroundTransparency />
   </document-format-change-manifest>
-  <repository-location id='EarthQuakeAnalysis' path='/t/securityanalysis/workbooks' revision='1.0' site='securityanalysis' />
+  <repository-location id='EarthQuakeAnalysis_17062746643850' path='/workbooks' revision='1.1' />
   <preferences>
     <preference name='ui.encoding.shelf.height' value='24' />
     <preference name='ui.shelf.height' value='26' />
@@ -60,7 +60,7 @@
       <connection class='federated'>
         <named-connections>
           <named-connection caption='BigQuery' name='bigquery.1kp0pe9129k2521d6tyy0144y07a'>
-            <connection CATALOG='youtube-factcheck' EXECCATALOG='youtube-factcheck' authentication='auth-oauth-service-account' class='bigquery' connection-dialect='google-sql' project='YouTube FactCheck' schema='earthquake_analysis' server-oauth='server-custom' username='musebe-tableau@youtube-factcheck.iam.gserviceaccount.com' workgroup-auth-mode='prompt' />
+            <connection CATALOG='youtube-factcheck' EXECCATALOG='youtube-factcheck' authentication='auth-oauth-service-account' class='bigquery' connection-dialect='google-sql' project='YouTube FactCheck' schema='earthquake_analysis' server-oauth='server-custom' username='musebe-tableau@youtube-factcheck.iam.gserviceaccount.com' workgroup-auth-mode='as-is' />
           </named-connection>
         </named-connections>
         <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='bigquery.1kp0pe9129k2521d6tyy0144y07a' name='earthquakes_copy' table='[youtube-factcheck.earthquake_analysis].[earthquakes_copy]' type='table' />
@@ -614,7 +614,37 @@
         <calculation class='bin' decimals='-6' formula='[eq_primary]' peg='0' size='0.095559' />
       </column>
       <_.fcp.ObjectModelTableType.true...column caption='earthquakes_copy' datatype='table' name='[__tableau_internal_object_id__].[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]' role='measure' type='quantitative' />
-      <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+      <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal'>
+        <semantic-values semantic-role='[Country].[Name]'>
+          <semantic-value key='&quot;SOLOMON SEA&quot;' value='&quot;Solomon Islands&quot;' />
+        </semantic-values>
+        <semantic-values semantic-role='[Geographical].[Latitude]'>
+          <semantic-value key='&quot;ATLANTIC OCEAN&quot;' value='-14.599265014363514' />
+          <semantic-value key='&quot;AZORES (PORTUGAL)&quot;' value='38.97590759217973' />
+          <semantic-value key='&quot;BERING SEA&quot;' value='56.907299999999999' />
+          <semantic-value key='&quot;CANARY ISLANDS&quot;' value='-16.629128999999999' />
+          <semantic-value key='&quot;INDIAN OCEAN&quot;' value='-33.137599999999999' />
+          <semantic-value key='&quot;KERMADEC ISLANDS (NEW ZEALAND)&quot;' value='-29.71239926341045' />
+          <semantic-value key='&quot;PACIFIC OCEAN&quot;' value='-8.7832000000000008' />
+          <semantic-value key='&quot;TASMAN SEA&quot;' value='-40.8581' />
+          <semantic-value key='&quot;UK TERRITORY&quot;' value='52.27363146720856' />
+          <semantic-value key='&quot;USA TERRITORY&quot;' value='37.367079773536972' />
+          <semantic-value key='&quot;WALLIS AND FUTUNA (FRENCH TERRITORY)&quot;' value='-14.293799999999999' />
+        </semantic-values>
+        <semantic-values semantic-role='[Geographical].[Longitude]'>
+          <semantic-value key='&quot;ATLANTIC OCEAN&quot;' value='-28.67308927446096' />
+          <semantic-value key='&quot;AZORES (PORTUGAL)&quot;' value='-27.932991104999086' />
+          <semantic-value key='&quot;BERING SEA&quot;' value='-178.1395' />
+          <semantic-value key='&quot;CANARY ISLANDS&quot;' value='28.291564999999999' />
+          <semantic-value key='&quot;INDIAN OCEAN&quot;' value='81.8262' />
+          <semantic-value key='&quot;KERMADEC ISLANDS (NEW ZEALAND)&quot;' value='-178.15071951406412' />
+          <semantic-value key='&quot;PACIFIC OCEAN&quot;' value='-124.5085' />
+          <semantic-value key='&quot;TASMAN SEA&quot;' value='160.43129999999999' />
+          <semantic-value key='&quot;UK TERRITORY&quot;' value='-1.3097912617156506' />
+          <semantic-value key='&quot;USA TERRITORY&quot;' value='-91.655029294776895' />
+          <semantic-value key='&quot;WALLIS AND FUTUNA (FRENCH TERRITORY)&quot;' value='-178.1165' />
+        </semantic-values>
+      </column>
       <column caption='Damage Description' datatype='integer' name='[damage_description]' role='measure' type='quantitative' />
       <column caption='Damage Millions Dollars' datatype='real' name='[damage_millions_dollars]' role='measure' type='quantitative' />
       <column caption='Day' datatype='integer' name='[day]' role='dimension' type='quantitative' />
@@ -670,13 +700,10 @@
           <field>[state]</field>
         </drill-path>
       </drill-paths>
-      <extract _.fcp.ObjectModelExtractV2.true...object-id='' _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' units='records'>
-        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/ivanmusebe/Documents/My Tableau Repository/Datasources/earthquakes.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='01/26/2024 01:10:33 PM' username='tableau_internal_user'>
+      <extract _.fcp.ObjectModelExtractV2.true...object-id='' _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='false' units='records'>
+        <connection access_mode='readonly' authentication='auth-none' author-locale='en_US' class='hyper' dbname='/Users/ivanmusebe/Documents/My Tableau Repository/Datasources/earthquakes.hyper' default-settings='yes' schema='Extract' sslmode='' tablename='Extract' update-time='' username='tableau_internal_user'>
           <_.fcp.ObjectModelEncapsulateLegacy.false...relation name='Extract' table='[Extract].[Extract]' type='table' />
           <_.fcp.ObjectModelEncapsulateLegacy.true...relation name='Extract' table='[Extract].[Extract]' type='table' />
-          <refresh increment-key='' incremental-updates='false'>
-            <refresh-event add-from-file-path='earthquakes' increment-value='%null%' refresh-type='create' rows-inserted='6272' timestamp-start='2024-01-26 13:10:23.408' />
-          </refresh>
           <metadata-records>
             <metadata-record class='column'>
               <remote-name>id</remote-name>
@@ -690,7 +717,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>6272</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>flag_tsunami</remote-name>
@@ -705,7 +731,6 @@
               <approx-count>2</approx-count>
               <contains-null>true</contains-null>
               <collation flag='0' name='LROOT' />
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>year</remote-name>
@@ -719,7 +744,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>720</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>month</remote-name>
@@ -733,7 +757,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>12</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>day</remote-name>
@@ -747,7 +770,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>31</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>hour</remote-name>
@@ -761,7 +783,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>25</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>minute</remote-name>
@@ -775,7 +796,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>61</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>second</remote-name>
@@ -789,7 +809,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>61</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>focal_depth</remote-name>
@@ -803,7 +822,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>96</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>eq_primary</remote-name>
@@ -817,7 +835,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>54</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>eq_mag_mw</remote-name>
@@ -831,7 +848,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>47</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>eq_mag_ms</remote-name>
@@ -845,7 +861,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>49</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>eq_mag_mb</remote-name>
@@ -859,7 +874,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>50</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>eq_mag_ml</remote-name>
@@ -873,7 +887,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>35</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>eq_mag_mfa</remote-name>
@@ -887,7 +900,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>14</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>eq_mag_unk</remote-name>
@@ -901,7 +913,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>53</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>intensity</remote-name>
@@ -915,7 +926,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>11</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>country</remote-name>
@@ -930,7 +940,6 @@
               <approx-count>147</approx-count>
               <contains-null>true</contains-null>
               <collation flag='0' name='LROOT' />
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>state</remote-name>
@@ -945,7 +954,6 @@
               <approx-count>38</approx-count>
               <contains-null>true</contains-null>
               <collation flag='0' name='LROOT' />
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>location_name</remote-name>
@@ -960,7 +968,6 @@
               <approx-count>2083</approx-count>
               <contains-null>true</contains-null>
               <collation flag='0' name='LROOT' />
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>latitude</remote-name>
@@ -974,7 +981,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>1820</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>longitude</remote-name>
@@ -988,7 +994,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>2360</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>region_code</remote-name>
@@ -1002,7 +1007,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>18</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>deaths</remote-name>
@@ -1016,7 +1020,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>290</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>deaths_description</remote-name>
@@ -1030,7 +1033,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>5</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>missing</remote-name>
@@ -1044,7 +1046,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>14</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>missing_description</remote-name>
@@ -1058,7 +1059,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>7</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>injuries</remote-name>
@@ -1072,7 +1072,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>227</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>injuries_description</remote-name>
@@ -1086,7 +1085,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>5</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>damage_millions_dollars</remote-name>
@@ -1100,7 +1098,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>269</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>damage_description</remote-name>
@@ -1114,7 +1111,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>5</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>houses_destroyed</remote-name>
@@ -1128,7 +1124,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>336</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>houses_destroyed_description</remote-name>
@@ -1142,7 +1137,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>5</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>houses_damaged</remote-name>
@@ -1156,7 +1150,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>301</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>houses_damaged_description</remote-name>
@@ -1170,7 +1163,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>5</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>total_deaths</remote-name>
@@ -1184,7 +1176,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>269</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>total_deaths_description</remote-name>
@@ -1198,7 +1189,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>5</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>total_missing</remote-name>
@@ -1212,7 +1202,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>14</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>total_missing_description</remote-name>
@@ -1226,7 +1215,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>4</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>total_injuries</remote-name>
@@ -1240,7 +1228,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>238</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>total_injuries_description</remote-name>
@@ -1254,7 +1241,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>5</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>total_damage_millions_dollars</remote-name>
@@ -1268,7 +1254,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>264</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>total_damage_description</remote-name>
@@ -1282,7 +1267,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>5</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>total_houses_destroyed</remote-name>
@@ -1296,7 +1280,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>380</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>total_houses_destroyed_description</remote-name>
@@ -1310,7 +1293,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>5</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>total_houses_damaged</remote-name>
@@ -1324,7 +1306,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>284</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>total_houses_damaged_description</remote-name>
@@ -1338,7 +1319,6 @@
               <aggregation>Sum</aggregation>
               <approx-count>5</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
             <metadata-record class='column'>
               <remote-name>Date</remote-name>
@@ -1352,7 +1332,6 @@
               <aggregation>Year</aggregation>
               <approx-count>3520</approx-count>
               <contains-null>true</contains-null>
-              <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
             </metadata-record>
           </metadata-records>
         </connection>
@@ -1963,7 +1942,37 @@
             <_.fcp.ObjectModelTableType.false...column caption='earthquakes_copy' datatype='integer' name='[__tableau_internal_object_id__].[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]' role='measure' type='quantitative' />
             <column-instance column='[__tableau_internal_object_id__].[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406:qk]' pivot='key' type='quantitative' />
             <_.fcp.ObjectModelTableType.true...column caption='earthquakes_copy' datatype='table' name='[__tableau_internal_object_id__].[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]' role='measure' type='quantitative' />
-            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal'>
+              <semantic-values semantic-role='[Country].[Name]'>
+                <semantic-value key='&quot;SOLOMON SEA&quot;' value='&quot;Solomon Islands&quot;' />
+              </semantic-values>
+              <semantic-values semantic-role='[Geographical].[Latitude]'>
+                <semantic-value key='&quot;ATLANTIC OCEAN&quot;' value='-14.599265014363514' />
+                <semantic-value key='&quot;AZORES (PORTUGAL)&quot;' value='38.97590759217973' />
+                <semantic-value key='&quot;BERING SEA&quot;' value='56.907299999999999' />
+                <semantic-value key='&quot;CANARY ISLANDS&quot;' value='-16.629128999999999' />
+                <semantic-value key='&quot;INDIAN OCEAN&quot;' value='-33.137599999999999' />
+                <semantic-value key='&quot;KERMADEC ISLANDS (NEW ZEALAND)&quot;' value='-29.71239926341045' />
+                <semantic-value key='&quot;PACIFIC OCEAN&quot;' value='-8.7832000000000008' />
+                <semantic-value key='&quot;TASMAN SEA&quot;' value='-40.8581' />
+                <semantic-value key='&quot;UK TERRITORY&quot;' value='52.27363146720856' />
+                <semantic-value key='&quot;USA TERRITORY&quot;' value='37.367079773536972' />
+                <semantic-value key='&quot;WALLIS AND FUTUNA (FRENCH TERRITORY)&quot;' value='-14.293799999999999' />
+              </semantic-values>
+              <semantic-values semantic-role='[Geographical].[Longitude]'>
+                <semantic-value key='&quot;ATLANTIC OCEAN&quot;' value='-28.67308927446096' />
+                <semantic-value key='&quot;AZORES (PORTUGAL)&quot;' value='-27.932991104999086' />
+                <semantic-value key='&quot;BERING SEA&quot;' value='-178.1395' />
+                <semantic-value key='&quot;CANARY ISLANDS&quot;' value='28.291564999999999' />
+                <semantic-value key='&quot;INDIAN OCEAN&quot;' value='81.8262' />
+                <semantic-value key='&quot;KERMADEC ISLANDS (NEW ZEALAND)&quot;' value='-178.15071951406412' />
+                <semantic-value key='&quot;PACIFIC OCEAN&quot;' value='-124.5085' />
+                <semantic-value key='&quot;TASMAN SEA&quot;' value='160.43129999999999' />
+                <semantic-value key='&quot;UK TERRITORY&quot;' value='-1.3097912617156506' />
+                <semantic-value key='&quot;USA TERRITORY&quot;' value='-91.655029294776895' />
+                <semantic-value key='&quot;WALLIS AND FUTUNA (FRENCH TERRITORY)&quot;' value='-178.1165' />
+              </semantic-values>
+            </column>
             <column-instance column='[country]' derivation='None' name='[none:country:nk]' pivot='key' type='nominal' />
             <column-instance column='[year]' derivation='None' name='[none:year:qk]' pivot='key' type='quantitative' />
             <column caption='Year' datatype='integer' name='[year]' role='dimension' type='quantitative' />
@@ -2050,7 +2059,37 @@
             <_.fcp.ObjectModelTableType.false...column caption='earthquakes_copy' datatype='integer' name='[__tableau_internal_object_id__].[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]' role='measure' type='quantitative' />
             <column-instance column='[__tableau_internal_object_id__].[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406:qk]' pivot='key' type='quantitative' />
             <_.fcp.ObjectModelTableType.true...column caption='earthquakes_copy' datatype='table' name='[__tableau_internal_object_id__].[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]' role='measure' type='quantitative' />
-            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal'>
+              <semantic-values semantic-role='[Country].[Name]'>
+                <semantic-value key='&quot;SOLOMON SEA&quot;' value='&quot;Solomon Islands&quot;' />
+              </semantic-values>
+              <semantic-values semantic-role='[Geographical].[Latitude]'>
+                <semantic-value key='&quot;ATLANTIC OCEAN&quot;' value='-14.599265014363514' />
+                <semantic-value key='&quot;AZORES (PORTUGAL)&quot;' value='38.97590759217973' />
+                <semantic-value key='&quot;BERING SEA&quot;' value='56.907299999999999' />
+                <semantic-value key='&quot;CANARY ISLANDS&quot;' value='-16.629128999999999' />
+                <semantic-value key='&quot;INDIAN OCEAN&quot;' value='-33.137599999999999' />
+                <semantic-value key='&quot;KERMADEC ISLANDS (NEW ZEALAND)&quot;' value='-29.71239926341045' />
+                <semantic-value key='&quot;PACIFIC OCEAN&quot;' value='-8.7832000000000008' />
+                <semantic-value key='&quot;TASMAN SEA&quot;' value='-40.8581' />
+                <semantic-value key='&quot;UK TERRITORY&quot;' value='52.27363146720856' />
+                <semantic-value key='&quot;USA TERRITORY&quot;' value='37.367079773536972' />
+                <semantic-value key='&quot;WALLIS AND FUTUNA (FRENCH TERRITORY)&quot;' value='-14.293799999999999' />
+              </semantic-values>
+              <semantic-values semantic-role='[Geographical].[Longitude]'>
+                <semantic-value key='&quot;ATLANTIC OCEAN&quot;' value='-28.67308927446096' />
+                <semantic-value key='&quot;AZORES (PORTUGAL)&quot;' value='-27.932991104999086' />
+                <semantic-value key='&quot;BERING SEA&quot;' value='-178.1395' />
+                <semantic-value key='&quot;CANARY ISLANDS&quot;' value='28.291564999999999' />
+                <semantic-value key='&quot;INDIAN OCEAN&quot;' value='81.8262' />
+                <semantic-value key='&quot;KERMADEC ISLANDS (NEW ZEALAND)&quot;' value='-178.15071951406412' />
+                <semantic-value key='&quot;PACIFIC OCEAN&quot;' value='-124.5085' />
+                <semantic-value key='&quot;TASMAN SEA&quot;' value='160.43129999999999' />
+                <semantic-value key='&quot;UK TERRITORY&quot;' value='-1.3097912617156506' />
+                <semantic-value key='&quot;USA TERRITORY&quot;' value='-91.655029294776895' />
+                <semantic-value key='&quot;WALLIS AND FUTUNA (FRENCH TERRITORY)&quot;' value='-178.1165' />
+              </semantic-values>
+            </column>
             <column-instance column='[country]' derivation='None' name='[none:country:nk]' pivot='key' type='nominal' />
             <column-instance column='[region_code]' derivation='None' name='[none:region_code:ok]' pivot='key' type='ordinal' />
             <column-instance column='[year]' derivation='None' name='[none:year:qk]' pivot='key' type='quantitative' />
@@ -2140,7 +2179,37 @@
             <_.fcp.ObjectModelTableType.false...column caption='earthquakes_copy' datatype='integer' name='[__tableau_internal_object_id__].[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]' role='measure' type='quantitative' />
             <column-instance column='[__tableau_internal_object_id__].[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406:qk]' pivot='key' type='quantitative' />
             <_.fcp.ObjectModelTableType.true...column caption='earthquakes_copy' datatype='table' name='[__tableau_internal_object_id__].[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]' role='measure' type='quantitative' />
-            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal'>
+              <semantic-values semantic-role='[Country].[Name]'>
+                <semantic-value key='&quot;SOLOMON SEA&quot;' value='&quot;Solomon Islands&quot;' />
+              </semantic-values>
+              <semantic-values semantic-role='[Geographical].[Latitude]'>
+                <semantic-value key='&quot;ATLANTIC OCEAN&quot;' value='-14.599265014363514' />
+                <semantic-value key='&quot;AZORES (PORTUGAL)&quot;' value='38.97590759217973' />
+                <semantic-value key='&quot;BERING SEA&quot;' value='56.907299999999999' />
+                <semantic-value key='&quot;CANARY ISLANDS&quot;' value='-16.629128999999999' />
+                <semantic-value key='&quot;INDIAN OCEAN&quot;' value='-33.137599999999999' />
+                <semantic-value key='&quot;KERMADEC ISLANDS (NEW ZEALAND)&quot;' value='-29.71239926341045' />
+                <semantic-value key='&quot;PACIFIC OCEAN&quot;' value='-8.7832000000000008' />
+                <semantic-value key='&quot;TASMAN SEA&quot;' value='-40.8581' />
+                <semantic-value key='&quot;UK TERRITORY&quot;' value='52.27363146720856' />
+                <semantic-value key='&quot;USA TERRITORY&quot;' value='37.367079773536972' />
+                <semantic-value key='&quot;WALLIS AND FUTUNA (FRENCH TERRITORY)&quot;' value='-14.293799999999999' />
+              </semantic-values>
+              <semantic-values semantic-role='[Geographical].[Longitude]'>
+                <semantic-value key='&quot;ATLANTIC OCEAN&quot;' value='-28.67308927446096' />
+                <semantic-value key='&quot;AZORES (PORTUGAL)&quot;' value='-27.932991104999086' />
+                <semantic-value key='&quot;BERING SEA&quot;' value='-178.1395' />
+                <semantic-value key='&quot;CANARY ISLANDS&quot;' value='28.291564999999999' />
+                <semantic-value key='&quot;INDIAN OCEAN&quot;' value='81.8262' />
+                <semantic-value key='&quot;KERMADEC ISLANDS (NEW ZEALAND)&quot;' value='-178.15071951406412' />
+                <semantic-value key='&quot;PACIFIC OCEAN&quot;' value='-124.5085' />
+                <semantic-value key='&quot;TASMAN SEA&quot;' value='160.43129999999999' />
+                <semantic-value key='&quot;UK TERRITORY&quot;' value='-1.3097912617156506' />
+                <semantic-value key='&quot;USA TERRITORY&quot;' value='-91.655029294776895' />
+                <semantic-value key='&quot;WALLIS AND FUTUNA (FRENCH TERRITORY)&quot;' value='-178.1165' />
+              </semantic-values>
+            </column>
             <column-instance column='[country]' derivation='None' name='[none:country:nk]' pivot='key' type='nominal' />
             <column-instance column='[year]' derivation='None' name='[none:year:qk]' pivot='key' type='quantitative' />
             <column caption='Year' datatype='integer' name='[year]' role='dimension' type='quantitative' />
@@ -2227,7 +2296,37 @@
             <datasource caption='earthquakes' name='federated.0c6wrz51qgix4k1acehe3132cxyj' />
           </datasources>
           <datasource-dependencies datasource='federated.0c6wrz51qgix4k1acehe3132cxyj'>
-            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal'>
+              <semantic-values semantic-role='[Country].[Name]'>
+                <semantic-value key='&quot;SOLOMON SEA&quot;' value='&quot;Solomon Islands&quot;' />
+              </semantic-values>
+              <semantic-values semantic-role='[Geographical].[Latitude]'>
+                <semantic-value key='&quot;ATLANTIC OCEAN&quot;' value='-14.599265014363514' />
+                <semantic-value key='&quot;AZORES (PORTUGAL)&quot;' value='38.97590759217973' />
+                <semantic-value key='&quot;BERING SEA&quot;' value='56.907299999999999' />
+                <semantic-value key='&quot;CANARY ISLANDS&quot;' value='-16.629128999999999' />
+                <semantic-value key='&quot;INDIAN OCEAN&quot;' value='-33.137599999999999' />
+                <semantic-value key='&quot;KERMADEC ISLANDS (NEW ZEALAND)&quot;' value='-29.71239926341045' />
+                <semantic-value key='&quot;PACIFIC OCEAN&quot;' value='-8.7832000000000008' />
+                <semantic-value key='&quot;TASMAN SEA&quot;' value='-40.8581' />
+                <semantic-value key='&quot;UK TERRITORY&quot;' value='52.27363146720856' />
+                <semantic-value key='&quot;USA TERRITORY&quot;' value='37.367079773536972' />
+                <semantic-value key='&quot;WALLIS AND FUTUNA (FRENCH TERRITORY)&quot;' value='-14.293799999999999' />
+              </semantic-values>
+              <semantic-values semantic-role='[Geographical].[Longitude]'>
+                <semantic-value key='&quot;ATLANTIC OCEAN&quot;' value='-28.67308927446096' />
+                <semantic-value key='&quot;AZORES (PORTUGAL)&quot;' value='-27.932991104999086' />
+                <semantic-value key='&quot;BERING SEA&quot;' value='-178.1395' />
+                <semantic-value key='&quot;CANARY ISLANDS&quot;' value='28.291564999999999' />
+                <semantic-value key='&quot;INDIAN OCEAN&quot;' value='81.8262' />
+                <semantic-value key='&quot;KERMADEC ISLANDS (NEW ZEALAND)&quot;' value='-178.15071951406412' />
+                <semantic-value key='&quot;PACIFIC OCEAN&quot;' value='-124.5085' />
+                <semantic-value key='&quot;TASMAN SEA&quot;' value='160.43129999999999' />
+                <semantic-value key='&quot;UK TERRITORY&quot;' value='-1.3097912617156506' />
+                <semantic-value key='&quot;USA TERRITORY&quot;' value='-91.655029294776895' />
+                <semantic-value key='&quot;WALLIS AND FUTUNA (FRENCH TERRITORY)&quot;' value='-178.1165' />
+              </semantic-values>
+            </column>
             <column caption='Eq Primary' datatype='real' name='[eq_primary]' role='measure' type='quantitative' />
             <column-instance column='[eq_primary]' derivation='Max' name='[max:eq_primary:qk]' pivot='key' type='quantitative' />
             <column-instance column='[country]' derivation='None' name='[none:country:nk]' pivot='key' type='nominal' />
@@ -2316,7 +2415,37 @@
           <datasource-dependencies datasource='federated.0c6wrz51qgix4k1acehe3132cxyj'>
             <column-instance column='[latitude]' derivation='Avg' name='[avg:latitude:qk]' pivot='key' type='quantitative' />
             <column-instance column='[longitude]' derivation='Avg' name='[avg:longitude:qk]' pivot='key' type='quantitative' />
-            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal'>
+              <semantic-values semantic-role='[Country].[Name]'>
+                <semantic-value key='&quot;SOLOMON SEA&quot;' value='&quot;Solomon Islands&quot;' />
+              </semantic-values>
+              <semantic-values semantic-role='[Geographical].[Latitude]'>
+                <semantic-value key='&quot;ATLANTIC OCEAN&quot;' value='-14.599265014363514' />
+                <semantic-value key='&quot;AZORES (PORTUGAL)&quot;' value='38.97590759217973' />
+                <semantic-value key='&quot;BERING SEA&quot;' value='56.907299999999999' />
+                <semantic-value key='&quot;CANARY ISLANDS&quot;' value='-16.629128999999999' />
+                <semantic-value key='&quot;INDIAN OCEAN&quot;' value='-33.137599999999999' />
+                <semantic-value key='&quot;KERMADEC ISLANDS (NEW ZEALAND)&quot;' value='-29.71239926341045' />
+                <semantic-value key='&quot;PACIFIC OCEAN&quot;' value='-8.7832000000000008' />
+                <semantic-value key='&quot;TASMAN SEA&quot;' value='-40.8581' />
+                <semantic-value key='&quot;UK TERRITORY&quot;' value='52.27363146720856' />
+                <semantic-value key='&quot;USA TERRITORY&quot;' value='37.367079773536972' />
+                <semantic-value key='&quot;WALLIS AND FUTUNA (FRENCH TERRITORY)&quot;' value='-14.293799999999999' />
+              </semantic-values>
+              <semantic-values semantic-role='[Geographical].[Longitude]'>
+                <semantic-value key='&quot;ATLANTIC OCEAN&quot;' value='-28.67308927446096' />
+                <semantic-value key='&quot;AZORES (PORTUGAL)&quot;' value='-27.932991104999086' />
+                <semantic-value key='&quot;BERING SEA&quot;' value='-178.1395' />
+                <semantic-value key='&quot;CANARY ISLANDS&quot;' value='28.291564999999999' />
+                <semantic-value key='&quot;INDIAN OCEAN&quot;' value='81.8262' />
+                <semantic-value key='&quot;KERMADEC ISLANDS (NEW ZEALAND)&quot;' value='-178.15071951406412' />
+                <semantic-value key='&quot;PACIFIC OCEAN&quot;' value='-124.5085' />
+                <semantic-value key='&quot;TASMAN SEA&quot;' value='160.43129999999999' />
+                <semantic-value key='&quot;UK TERRITORY&quot;' value='-1.3097912617156506' />
+                <semantic-value key='&quot;USA TERRITORY&quot;' value='-91.655029294776895' />
+                <semantic-value key='&quot;WALLIS AND FUTUNA (FRENCH TERRITORY)&quot;' value='-178.1165' />
+              </semantic-values>
+            </column>
             <column caption='Id' datatype='integer' name='[id]' role='dimension' type='ordinal' />
             <column aggregation='Avg' caption='Latitude' datatype='real' name='[latitude]' role='measure' semantic-role='[Geographical].[Latitude]' type='quantitative' />
             <column aggregation='Avg' caption='Longitude' datatype='real' name='[longitude]' role='measure' semantic-role='[Geographical].[Longitude]' type='quantitative' />
@@ -2342,6 +2471,10 @@
           <aggregation value='true' />
         </view>
         <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.0c6wrz51qgix4k1acehe3132cxyj].[avg:longitude:qk]' field-type='quantitative' max='18642061.669533461' min='-21172613.664393622' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.0c6wrz51qgix4k1acehe3132cxyj].[avg:latitude:qk]' field-type='quantitative' max='8730696.0530219749' min='-4380368.5439095013' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+          </style-rule>
           <style-rule element='map'>
             <format attr='map-style' value='/maps/winter-v2/style.json?key=NG75Zc1yqER87rYZx2eh' />
             <format attr='washout' value='0' />
@@ -2379,7 +2512,37 @@
             <datasource caption='earthquakes' name='federated.0c6wrz51qgix4k1acehe3132cxyj' />
           </datasources>
           <datasource-dependencies datasource='federated.0c6wrz51qgix4k1acehe3132cxyj'>
-            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal'>
+              <semantic-values semantic-role='[Country].[Name]'>
+                <semantic-value key='&quot;SOLOMON SEA&quot;' value='&quot;Solomon Islands&quot;' />
+              </semantic-values>
+              <semantic-values semantic-role='[Geographical].[Latitude]'>
+                <semantic-value key='&quot;ATLANTIC OCEAN&quot;' value='-14.599265014363514' />
+                <semantic-value key='&quot;AZORES (PORTUGAL)&quot;' value='38.97590759217973' />
+                <semantic-value key='&quot;BERING SEA&quot;' value='56.907299999999999' />
+                <semantic-value key='&quot;CANARY ISLANDS&quot;' value='-16.629128999999999' />
+                <semantic-value key='&quot;INDIAN OCEAN&quot;' value='-33.137599999999999' />
+                <semantic-value key='&quot;KERMADEC ISLANDS (NEW ZEALAND)&quot;' value='-29.71239926341045' />
+                <semantic-value key='&quot;PACIFIC OCEAN&quot;' value='-8.7832000000000008' />
+                <semantic-value key='&quot;TASMAN SEA&quot;' value='-40.8581' />
+                <semantic-value key='&quot;UK TERRITORY&quot;' value='52.27363146720856' />
+                <semantic-value key='&quot;USA TERRITORY&quot;' value='37.367079773536972' />
+                <semantic-value key='&quot;WALLIS AND FUTUNA (FRENCH TERRITORY)&quot;' value='-14.293799999999999' />
+              </semantic-values>
+              <semantic-values semantic-role='[Geographical].[Longitude]'>
+                <semantic-value key='&quot;ATLANTIC OCEAN&quot;' value='-28.67308927446096' />
+                <semantic-value key='&quot;AZORES (PORTUGAL)&quot;' value='-27.932991104999086' />
+                <semantic-value key='&quot;BERING SEA&quot;' value='-178.1395' />
+                <semantic-value key='&quot;CANARY ISLANDS&quot;' value='28.291564999999999' />
+                <semantic-value key='&quot;INDIAN OCEAN&quot;' value='81.8262' />
+                <semantic-value key='&quot;KERMADEC ISLANDS (NEW ZEALAND)&quot;' value='-178.15071951406412' />
+                <semantic-value key='&quot;PACIFIC OCEAN&quot;' value='-124.5085' />
+                <semantic-value key='&quot;TASMAN SEA&quot;' value='160.43129999999999' />
+                <semantic-value key='&quot;UK TERRITORY&quot;' value='-1.3097912617156506' />
+                <semantic-value key='&quot;USA TERRITORY&quot;' value='-91.655029294776895' />
+                <semantic-value key='&quot;WALLIS AND FUTUNA (FRENCH TERRITORY)&quot;' value='-178.1165' />
+              </semantic-values>
+            </column>
             <column caption='Eq Primary' datatype='real' name='[eq_primary]' role='measure' type='quantitative' />
             <column caption='Flag Tsunami' datatype='string' name='[flag_tsunami]' role='dimension' type='nominal' />
             <column caption='Focal Depth' datatype='integer' name='[focal_depth]' role='measure' type='quantitative' />
@@ -2457,7 +2620,37 @@
             <_.fcp.ObjectModelTableType.false...column caption='earthquakes_copy' datatype='integer' name='[__tableau_internal_object_id__].[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]' role='measure' type='quantitative' />
             <column-instance column='[__tableau_internal_object_id__].[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406:qk]' pivot='key' type='quantitative' />
             <_.fcp.ObjectModelTableType.true...column caption='earthquakes_copy' datatype='table' name='[__tableau_internal_object_id__].[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]' role='measure' type='quantitative' />
-            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal'>
+              <semantic-values semantic-role='[Country].[Name]'>
+                <semantic-value key='&quot;SOLOMON SEA&quot;' value='&quot;Solomon Islands&quot;' />
+              </semantic-values>
+              <semantic-values semantic-role='[Geographical].[Latitude]'>
+                <semantic-value key='&quot;ATLANTIC OCEAN&quot;' value='-14.599265014363514' />
+                <semantic-value key='&quot;AZORES (PORTUGAL)&quot;' value='38.97590759217973' />
+                <semantic-value key='&quot;BERING SEA&quot;' value='56.907299999999999' />
+                <semantic-value key='&quot;CANARY ISLANDS&quot;' value='-16.629128999999999' />
+                <semantic-value key='&quot;INDIAN OCEAN&quot;' value='-33.137599999999999' />
+                <semantic-value key='&quot;KERMADEC ISLANDS (NEW ZEALAND)&quot;' value='-29.71239926341045' />
+                <semantic-value key='&quot;PACIFIC OCEAN&quot;' value='-8.7832000000000008' />
+                <semantic-value key='&quot;TASMAN SEA&quot;' value='-40.8581' />
+                <semantic-value key='&quot;UK TERRITORY&quot;' value='52.27363146720856' />
+                <semantic-value key='&quot;USA TERRITORY&quot;' value='37.367079773536972' />
+                <semantic-value key='&quot;WALLIS AND FUTUNA (FRENCH TERRITORY)&quot;' value='-14.293799999999999' />
+              </semantic-values>
+              <semantic-values semantic-role='[Geographical].[Longitude]'>
+                <semantic-value key='&quot;ATLANTIC OCEAN&quot;' value='-28.67308927446096' />
+                <semantic-value key='&quot;AZORES (PORTUGAL)&quot;' value='-27.932991104999086' />
+                <semantic-value key='&quot;BERING SEA&quot;' value='-178.1395' />
+                <semantic-value key='&quot;CANARY ISLANDS&quot;' value='28.291564999999999' />
+                <semantic-value key='&quot;INDIAN OCEAN&quot;' value='81.8262' />
+                <semantic-value key='&quot;KERMADEC ISLANDS (NEW ZEALAND)&quot;' value='-178.15071951406412' />
+                <semantic-value key='&quot;PACIFIC OCEAN&quot;' value='-124.5085' />
+                <semantic-value key='&quot;TASMAN SEA&quot;' value='160.43129999999999' />
+                <semantic-value key='&quot;UK TERRITORY&quot;' value='-1.3097912617156506' />
+                <semantic-value key='&quot;USA TERRITORY&quot;' value='-91.655029294776895' />
+                <semantic-value key='&quot;WALLIS AND FUTUNA (FRENCH TERRITORY)&quot;' value='-178.1165' />
+              </semantic-values>
+            </column>
             <column-instance column='[country]' derivation='None' name='[none:country:nk]' pivot='key' type='nominal' />
             <column-instance column='[region_code]' derivation='None' name='[none:region_code:ok]' pivot='key' type='ordinal' />
             <column-instance column='[year]' derivation='None' name='[none:year:qk]' pivot='key' type='quantitative' />
@@ -2546,7 +2739,37 @@
             <_.fcp.ObjectModelTableType.false...column caption='earthquakes_copy' datatype='integer' name='[__tableau_internal_object_id__].[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]' role='measure' type='quantitative' />
             <column-instance column='[__tableau_internal_object_id__].[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406:qk]' pivot='key' type='quantitative' />
             <_.fcp.ObjectModelTableType.true...column caption='earthquakes_copy' datatype='table' name='[__tableau_internal_object_id__].[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]' role='measure' type='quantitative' />
-            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal'>
+              <semantic-values semantic-role='[Country].[Name]'>
+                <semantic-value key='&quot;SOLOMON SEA&quot;' value='&quot;Solomon Islands&quot;' />
+              </semantic-values>
+              <semantic-values semantic-role='[Geographical].[Latitude]'>
+                <semantic-value key='&quot;ATLANTIC OCEAN&quot;' value='-14.599265014363514' />
+                <semantic-value key='&quot;AZORES (PORTUGAL)&quot;' value='38.97590759217973' />
+                <semantic-value key='&quot;BERING SEA&quot;' value='56.907299999999999' />
+                <semantic-value key='&quot;CANARY ISLANDS&quot;' value='-16.629128999999999' />
+                <semantic-value key='&quot;INDIAN OCEAN&quot;' value='-33.137599999999999' />
+                <semantic-value key='&quot;KERMADEC ISLANDS (NEW ZEALAND)&quot;' value='-29.71239926341045' />
+                <semantic-value key='&quot;PACIFIC OCEAN&quot;' value='-8.7832000000000008' />
+                <semantic-value key='&quot;TASMAN SEA&quot;' value='-40.8581' />
+                <semantic-value key='&quot;UK TERRITORY&quot;' value='52.27363146720856' />
+                <semantic-value key='&quot;USA TERRITORY&quot;' value='37.367079773536972' />
+                <semantic-value key='&quot;WALLIS AND FUTUNA (FRENCH TERRITORY)&quot;' value='-14.293799999999999' />
+              </semantic-values>
+              <semantic-values semantic-role='[Geographical].[Longitude]'>
+                <semantic-value key='&quot;ATLANTIC OCEAN&quot;' value='-28.67308927446096' />
+                <semantic-value key='&quot;AZORES (PORTUGAL)&quot;' value='-27.932991104999086' />
+                <semantic-value key='&quot;BERING SEA&quot;' value='-178.1395' />
+                <semantic-value key='&quot;CANARY ISLANDS&quot;' value='28.291564999999999' />
+                <semantic-value key='&quot;INDIAN OCEAN&quot;' value='81.8262' />
+                <semantic-value key='&quot;KERMADEC ISLANDS (NEW ZEALAND)&quot;' value='-178.15071951406412' />
+                <semantic-value key='&quot;PACIFIC OCEAN&quot;' value='-124.5085' />
+                <semantic-value key='&quot;TASMAN SEA&quot;' value='160.43129999999999' />
+                <semantic-value key='&quot;UK TERRITORY&quot;' value='-1.3097912617156506' />
+                <semantic-value key='&quot;USA TERRITORY&quot;' value='-91.655029294776895' />
+                <semantic-value key='&quot;WALLIS AND FUTUNA (FRENCH TERRITORY)&quot;' value='-178.1165' />
+              </semantic-values>
+            </column>
             <column caption='Flag Tsunami' datatype='string' name='[flag_tsunami]' role='dimension' type='nominal' />
             <column-instance column='[country]' derivation='None' name='[none:country:nk]' pivot='key' type='nominal' />
             <column-instance column='[flag_tsunami]' derivation='None' name='[none:flag_tsunami:nk]' pivot='key' type='nominal' />
@@ -2629,7 +2852,37 @@
             <_.fcp.ObjectModelTableType.false...column caption='earthquakes_copy' datatype='integer' name='[__tableau_internal_object_id__].[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]' role='measure' type='quantitative' />
             <column-instance column='[__tableau_internal_object_id__].[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]' derivation='Count' name='[__tableau_internal_object_id__].[cnt:earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406:qk]' pivot='key' type='quantitative' />
             <_.fcp.ObjectModelTableType.true...column caption='earthquakes_copy' datatype='table' name='[__tableau_internal_object_id__].[earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406]' role='measure' type='quantitative' />
-            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal'>
+              <semantic-values semantic-role='[Country].[Name]'>
+                <semantic-value key='&quot;SOLOMON SEA&quot;' value='&quot;Solomon Islands&quot;' />
+              </semantic-values>
+              <semantic-values semantic-role='[Geographical].[Latitude]'>
+                <semantic-value key='&quot;ATLANTIC OCEAN&quot;' value='-14.599265014363514' />
+                <semantic-value key='&quot;AZORES (PORTUGAL)&quot;' value='38.97590759217973' />
+                <semantic-value key='&quot;BERING SEA&quot;' value='56.907299999999999' />
+                <semantic-value key='&quot;CANARY ISLANDS&quot;' value='-16.629128999999999' />
+                <semantic-value key='&quot;INDIAN OCEAN&quot;' value='-33.137599999999999' />
+                <semantic-value key='&quot;KERMADEC ISLANDS (NEW ZEALAND)&quot;' value='-29.71239926341045' />
+                <semantic-value key='&quot;PACIFIC OCEAN&quot;' value='-8.7832000000000008' />
+                <semantic-value key='&quot;TASMAN SEA&quot;' value='-40.8581' />
+                <semantic-value key='&quot;UK TERRITORY&quot;' value='52.27363146720856' />
+                <semantic-value key='&quot;USA TERRITORY&quot;' value='37.367079773536972' />
+                <semantic-value key='&quot;WALLIS AND FUTUNA (FRENCH TERRITORY)&quot;' value='-14.293799999999999' />
+              </semantic-values>
+              <semantic-values semantic-role='[Geographical].[Longitude]'>
+                <semantic-value key='&quot;ATLANTIC OCEAN&quot;' value='-28.67308927446096' />
+                <semantic-value key='&quot;AZORES (PORTUGAL)&quot;' value='-27.932991104999086' />
+                <semantic-value key='&quot;BERING SEA&quot;' value='-178.1395' />
+                <semantic-value key='&quot;CANARY ISLANDS&quot;' value='28.291564999999999' />
+                <semantic-value key='&quot;INDIAN OCEAN&quot;' value='81.8262' />
+                <semantic-value key='&quot;KERMADEC ISLANDS (NEW ZEALAND)&quot;' value='-178.15071951406412' />
+                <semantic-value key='&quot;PACIFIC OCEAN&quot;' value='-124.5085' />
+                <semantic-value key='&quot;TASMAN SEA&quot;' value='160.43129999999999' />
+                <semantic-value key='&quot;UK TERRITORY&quot;' value='-1.3097912617156506' />
+                <semantic-value key='&quot;USA TERRITORY&quot;' value='-91.655029294776895' />
+                <semantic-value key='&quot;WALLIS AND FUTUNA (FRENCH TERRITORY)&quot;' value='-178.1165' />
+              </semantic-values>
+            </column>
             <column-instance column='[country]' derivation='None' name='[none:country:nk]' pivot='key' type='nominal' />
             <column-instance column='[year]' derivation='None' name='[none:year:qk]' pivot='key' type='quantitative' />
             <column caption='Year' datatype='integer' name='[year]' role='dimension' type='quantitative' />
@@ -2812,13 +3065,13 @@
             <format attr='margin' value='8' />
           </zone-style>
         </zone>
-        <zone h='1692' id='11' name='County Polygon' pane-specification-id='0' param='[federated.0c6wrz51qgix4k1acehe3132cxyj].[__tableau_internal_object_id__].[cnt:earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406:qk]' type-v2='color' w='16214' x='1786' y='28500' />
+        <zone h='1692' id='11' name='County Polygon' pane-specification-id='0' param='[federated.0c6wrz51qgix4k1acehe3132cxyj].[__tableau_internal_object_id__].[cnt:earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406:qk]' type-v2='color' w='16182' x='3273' y='30346' />
         <zone h='3308' id='14' name='Year Distribution' param='[federated.0c6wrz51qgix4k1acehe3132cxyj].[none:year:qk]' show-domain='false' show-null-ctrls='false' type-v2='filter' w='41727' x='909' y='2654' />
         <zone h='3308' id='16' name='Daily Distrubution' param='[federated.0c6wrz51qgix4k1acehe3132cxyj].[none:eq_primary:qk]' show-domain='false' show-null-ctrls='false' type-v2='filter' w='40727' x='43000' y='2692' />
-        <zone h='2231' id='17' name='Daily Distrubution' pane-specification-id='0' param='[federated.0c6wrz51qgix4k1acehe3132cxyj].[sum:eq_primary:qk]' type-v2='color' w='13286' x='47429' y='46000' />
+        <zone h='2231' id='17' name='Daily Distrubution' pane-specification-id='0' param='[federated.0c6wrz51qgix4k1acehe3132cxyj].[sum:eq_primary:qk]' type-v2='color' w='13273' x='48455' y='34654' />
         <zone h='3269' id='20' name='Regions' param='[federated.0c6wrz51qgix4k1acehe3132cxyj].[none:region_code:ok]' type-v2='filter' w='15273' x='83909' y='2692' />
-        <zone h='3731' id='26' name='Countries' synchronized='1' type-v2='currpage' w='10727' x='86000' y='50000' />
-        <zone h='2231' id='31' name='Magnitude - Focal Depth' pane-specification-id='0' param='[federated.0c6wrz51qgix4k1acehe3132cxyj].[none:flag_tsunami:nk]' type-v2='color' w='12727' x='6727' y='72000' />
+        <zone h='3731' id='26' name='Countries' synchronized='1' type-v2='currpage' w='10727' x='86273' y='52000' />
+        <zone h='2231' id='31' name='Magnitude - Focal Depth' pane-specification-id='0' param='[federated.0c6wrz51qgix4k1acehe3132cxyj].[none:flag_tsunami:nk]' type-v2='color' w='12727' x='6727' y='73462' />
         <zone h='2923' id='35' name='Count' w='33273' x='50455' y='7192' />
         <zone forceUpdate='true' h='1538' id='36' type-v2='text' w='14909' x='36273' y='7962'>
           <formatted-text>
@@ -2830,8 +3083,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='2800' minheight='2800' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='40' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='99384' id='39' param='vert' type-v2='layout-flow' w='98546' x='727' y='308'>
+            <zone h='100000' id='46' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='99384' id='45' param='vert' type-v2='layout-flow' w='98546' x='727' y='308'>
                 <zone forceUpdate='true' h='2270' id='5' type-v2='text' w='98546' x='727' y='308'>
                   <formatted-text>
                     <run bold='true' fontalignment='1' fontcolor='#b2361d' fontsize='28'>World Earthquake Distribution</run>
@@ -2887,7 +3140,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone h='1692' id='11' name='County Polygon' pane-specification-id='0' param='[federated.0c6wrz51qgix4k1acehe3132cxyj].[__tableau_internal_object_id__].[cnt:earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406:qk]' type-v2='color' w='16214' x='1786' y='28500'>
+                <zone h='1692' id='11' name='County Polygon' pane-specification-id='0' param='[federated.0c6wrz51qgix4k1acehe3132cxyj].[__tableau_internal_object_id__].[cnt:earthquakes_copy_B94B2CE4F14A46B1A65C4960332EB406:qk]' type-v2='color' w='16182' x='3273' y='30346'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -2934,7 +3187,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone h='2231' id='17' name='Daily Distrubution' pane-specification-id='0' param='[federated.0c6wrz51qgix4k1acehe3132cxyj].[sum:eq_primary:qk]' type-v2='color' w='13286' x='47429' y='46000'>
+                <zone h='2231' id='17' name='Daily Distrubution' pane-specification-id='0' param='[federated.0c6wrz51qgix4k1acehe3132cxyj].[sum:eq_primary:qk]' type-v2='color' w='13273' x='48455' y='34654'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -2982,7 +3235,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone h='2231' id='31' name='Magnitude - Focal Depth' pane-specification-id='0' param='[federated.0c6wrz51qgix4k1acehe3132cxyj].[none:flag_tsunami:nk]' type-v2='color' w='12727' x='6727' y='72000'>
+                <zone h='2231' id='31' name='Magnitude - Focal Depth' pane-specification-id='0' param='[federated.0c6wrz51qgix4k1acehe3132cxyj].[none:flag_tsunami:nk]' type-v2='color' w='12727' x='6727' y='73462'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -3001,7 +3254,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone h='3731' id='26' name='Countries' synchronized='1' type-v2='currpage' w='10727' x='86000' y='50000'>
+                <zone h='3731' id='26' name='Countries' synchronized='1' type-v2='currpage' w='10727' x='86273' y='52000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -3308,7 +3561,7 @@
           <zoom type='entire-view' />
         </viewpoint>
       </viewpoints>
-      <active id='-1' />
+      <active id='8' />
       <simple-id uuid='{1F09CD45-C797-4346-B659-8324717178F6}' />
     </window>
   </windows>
