@@ -6,10 +6,10 @@ My expertise lies in the seamless management of databases, encompassing tasks su
 Join me on this journey through the intricacies of Big Data, where every line of code and visualization is a reflection of my dedication to excellence in data management and analysis.
 
 ## Overview
-1. [Analyzing BigQuery Data with SQL](https://github.com/gmusebe/BigData_Landscape/tree/main/BigQuery#analysing-bigquery-data-with-sql)
-2. [Executing SQL Queries in Python](https://github.com/gmusebe/BigData_Landscape/blob/main/Python/README.md)
-3. [Visualising Data in Python](https://github.com/gmusebe/BigData_Landscape/blob/main/Python/README.md)
-4. [Syncing Tableau with BigQuery and Creating Visual Dashboards](https://github.com/gmusebe/BigData_Landscape/blob/main/Python/README.md)
+1. [Analyzing BigQuery Data with SQL](https://github.com/gmusebe/BigData_Landscape/tree/main/BigQuery)
+2. [Executing SQL Queries in Python](https://github.com/gmusebe/BigData_Landscape/tree/main/Python)
+3. [Visualising Data in Python](https://github.com/gmusebe/BigData_Landscape/tree/main/Python#visualising-data-in-python)
+4. [Syncing Tableau with BigQuery and Creating Visual Dashboards](https://github.com/gmusebe/BigData_Landscape/tree/main/Tableau)
 
 ### Prequisites
 This project assumes one has:
@@ -65,7 +65,12 @@ Google Cloud CLI is now installed
 
     `Project_name` is the project in GCP that you selected in step 4. 
 
-**Let's proceed to the Analysis.**
+For each step in the following repository ends you with a Tableau dashboard for monitoring earthqauke frequencies:.
+
+## Tableau Dashboard
+The live dashboard can be found [here](https://public.tableau.com/views/EarthQuakeAnalysis_17062746643850/EarthquakeDistributionBoard?:language=en-US&:display_count=n&:origin=viz_share_link):
+
+<div class='tableauPlaceholder' id='viz1706354511459' style='position: relative'><noscript><a href='#'><img alt='Earthquake Distribution Board ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ea&#47;EarthQuakeAnalysis_17062746643850&#47;EarthquakeDistributionBoard&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='EarthQuakeAnalysis_17062746643850&#47;EarthquakeDistributionBoard' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ea&#47;EarthQuakeAnalysis_17062746643850&#47;EarthquakeDistributionBoard&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>
 
 
 
